@@ -1,0 +1,42 @@
+<h1 butterbar align="center"> Loading...</h1>  <a type="reset" class="btn btn-default" href="javascript:history.go(-1);">后退</a>
+<div infoState>
+<h2><label>卡号：</label> {{card.cardNumber}}</h2>
+<!--<label>余额：</label><div>{{card.money | rmb}}</div>-->
+<h3><label>余额：</label>{{card.money}}</h3>
+    <hr>
+<h4>包含项目：</h4>
+    <div ng-repeat="item in card.items" class="col-md-offset-1">
+        项目名称： <label ng-bind="item.itemName"></label> &nbsp;&nbsp;负责人： <i ng-bind="item.itemOwner"></i> &nbsp;&nbsp;项目余额： <i ng-bind="item.itemCount"></i>
+    </div>
+<br>
+<form class="form-horizontal">
+    <div>
+        <!--<button class="btn btn-primary" disabled ng-hide="true">编辑</button>-->
+        <button class="btn btn-primary" ng-click="edit()">编辑</button>
+        <button type="button" data-toggle="modal" data-target="#myModal"  class="btn">删除</button>
+    </div>
+</form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade " id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3>
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    操作提示
+                </h3>
+            </div>
+            <div class="modal-body">
+               <h4>是否删除？</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove(this)">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

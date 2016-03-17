@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html ng-app="appManage">
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>软件学院财务管理系统</title>
+    <LINK REL="SHORTCUT ICON" HREF="../img/logo.jpg">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/vendor/bootstrap.min.css" rel="stylesheet"  media="screen">
+    <link href="../css/vendor/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+    <!-- APP CSS -->
+    <link href="../css/app/dashboard.css" rel="stylesheet">
+    <link href="../css/app/nav.css" rel="stylesheet">
+    <!--<link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">-->
+
+
+</head>
+<body ng-controller="CurrentCardCtrl">
+
+<nav class="navbar navbar-inverse navbar-fixed-top main-navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">软件学院财务管理系统</a>
+            <a class="navbar-brand" href="#" style="margin-left: 50px;">当前卡号:</a>
+            <p class="navbar-brand " ng-bind="CURRENT_CARD.cardNumber" style="margin-bottom: 0px;"></p>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right menu">
+                <li ng-controller="HomeCtrl"><a ng-click="gotoCardList()">银行卡管理</a></li>
+                <li ng-controller="ExitCtrl"><a ng-click="logout()">退出</a></li>
+                <li><a href="#">帮助</a></li>
+            </ul>
+            <!--<form class="navbar-form navbar-right">-->
+            <!--<input type="text" class="form-control" placeholder="Search...">-->
+        <!--</form>-->
+            <a class="navbar-brand" href="#" ng-bind="CardNumber"></a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <!--<li class="active">-->
+                    <!--<a href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收入管理</a>-->
+                    <!--<ul class="nav nav-sidebar">-->
+                        <!--<li><a ng-href="#/in/new/{{}}"><p align="center" >添加收入</p></a></li>-->
+                        <!--<li><a href="#/in/"><p align="center">收入明细</p></a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <li class="active">
+                    <a href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支出管理</a>
+                    <ul class="nav nav-sidebar">
+                        <li class="navli"><a ng-href="#/card/record/new/"><p align="center">添加记录</p></a></li>
+                        <li class="navli"><a href="#/card/records/1"><p align="center">收支明细</p></a></li>
+                    </ul>
+                </li>
+
+                <li class="active">
+                    <a href="">&nbsp;&nbsp;&nbsp;&nbsp;当前银行卡信息</a>
+                    <ul class="nav nav-sidebar">
+                        <li class="navli"><a href="#/card/view/{{CURRENT_CARD.cardId}}"><p align="center">查看</p></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+            <!--<h1 class="page-header">Dashboard</h1>-->
+
+            <!--<div class="row placeholders">-->
+                <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+                    <!--<img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">-->
+                    <!--<h4>Label</h4>-->
+                    <!--<span class="text-muted">Something else</span>-->
+                <!--</div>-->
+                <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+                    <!--<img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">-->
+                    <!--<h4>Label</h4>-->
+                    <!--<span class="text-muted">Something else</span>-->
+                <!--</div>-->
+                <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+                    <!--<img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">-->
+                    <!--<h4>Label</h4>-->
+                    <!--<span class="text-muted">Something else</span>-->
+                <!--</div>-->
+                <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+                    <!--<img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">-->
+                    <!--<h4>Label</h4>-->
+                    <!--<span class="text-muted">Something else</span>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<h2 class="sub-header">Section title</h2>-->
+            <div class="table-responsive">
+                <div ng-view></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/vendor/jquery.js"></script>
+<!--<script src="../js/vendor/jquery-1.8.3.min.js"></script>-->
+<script src="../js/vendor/bootstrap.min.js"></script>
+
+<!-- datepicker -->
+<script type="text/javascript" src="../js/vendor/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../js/vendor/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+
+<script src="../js/vendor/angular.min.js"></script>
+<script src="../js/vendor/angular-resource.min.js"></script>
+<script src="../js/vendor/angular-route.min.js"></script>
+
+
+<script src="../js/app/directives/map.js"></script>
+
+<script src="../js/app/directives/directives.js"></script>
+<script src="../js/app/services/loginService.js"></script>
+<script src="../js/app/services/cardServices.js"></script>
+<script src="../js/app/services/recordService.js"></script>
+
+<script src="../js/app/controllers/baseController.js"></script>
+<script src="../js/app/controllers/cardControllers.js"></script>
+<script src="../js/app/controllers/recordController.js"></script>
+
+<script src="../js/app/controllers/GlobalController.js"></script>
+<script type="text/javascript">
+$(function(){
+    $(".menu li").mouseover(function(e){
+        e.preventDefault();
+        $(this).tab("show");
+        $(".menu li").eq($(this).index()).addClass("nav-current active").siblings().removeClass("nav-current active");
+    });
+    $(".menu li").mouseout(function(e){
+        e.preventDefault();
+        $(".menu li").eq($(this).index()).removeClass("nav-current active");
+    });
+
+
+});
+
+
+</script>
+</body>
+</html>

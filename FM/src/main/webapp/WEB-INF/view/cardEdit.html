@@ -1,0 +1,50 @@
+
+<h2>
+    修改银行卡信息
+</h2>
+<hr>
+
+<form class="form-horizontal"  name="cardForm" ng-submit="save()"infoState>
+    <div class="form-group">
+        <label for="cardNumber" class="col-sm-2 control-label">卡号：</label>
+        <div class="col-sm-6">
+            <input ng-model="card.cardNumber" type="text" class="form-control" id="cardNumber" placeholder="卡号" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="items" class="col-sm-2 control-label">包含项目:</label>
+        <div class="col-sm-8">
+            <ul id="items" class="list-group" ng-controller="ItemsCtrl">
+                <li ng-repeat="item in card.items" class="list-group-item">
+                    <div class="col-xs-3">
+                        <input type="text" ng-model="item.itemName" class="form-control" placeholder="项目名称">
+                    </div>
+                    <div class="col-xs-3">
+                        <input id="owner" type="text" ng-model="item.itemOwner"
+                               class="form-control" placeholder="负责人">
+                    </div>
+                    <!--<div class="col-xs-2">-->
+                    <!--<input id="itemCount" type="number" ng-model="item.itemCount" ng-disabled="true" ng-hide="true"-->
+                    <!--class="form-control" placeholder="项目金额">-->
+                    <!--</div>-->
+
+                    <button type="button" class="btn btn-info" ng-click="removeItem($index)"> 删除 </button>
+                </li>
+                <br>
+                <button type="button" class="btn btn-info" ng-click="addItem()"> 添加 </button>
+            </ul>
+        </div>
+    </div>
+    <!--<div class="form-group" hidden>-->
+    <!--<label for="money" class="col-sm-2 control-label">银行卡总金额：</label>-->
+    <!--<div class="col-sm-6">-->
+    <!--<input ng-model="card.money"  type="number" class="form-control" id="money" placeholder="金额" required>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-6">
+            <button type="submit" class="btn btn-info" ng-disabled="cardForm.$invalid">确定</button>
+            <a class="btn btn-default"  href="javascript:history.go(-1);">取消</a>
+        </div>
+    </div>
+</form>

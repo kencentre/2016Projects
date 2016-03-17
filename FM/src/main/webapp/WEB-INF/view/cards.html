@@ -1,0 +1,11 @@
+
+<article>
+    <h2>选择银行卡</h2>
+    <hr>
+    <ul class="cards">
+        <li ng-repeat="card in cards" class="card" ng-click="gotoManageMoney(card)">
+            <!--<div><a ng-href="#/view/{{card.cardId}}" target="_self">{{card.cardNumber}}</a></div>-->
+            <div><a  target="_self">{{card.cardNumber}}</a></div>
+        </li>
+    </ul>
+</article>

@@ -1,0 +1,71 @@
+
+<h2>修改记录</h2>
+
+<h3>卡号：{{record.card.cardNumber}}  &nbsp;&nbsp;余额：{{record.card.money}}</h3>
+<hr>
+
+<form class="form-horizontal"  name="recordForm" ng-submit="save()"infoState>
+    <div class="form-group">
+        <label for="count" class="col-sm-2 control-label">金额：</label>
+        <div class="col-sm-6">
+            <input ng-model="record.count"  type="text" class="form-control" id="count" placeholder="金额" required>
+        </div>
+    </div>
+    <!--<div class="form-group">-->
+        <!--<label for="item" class="col-sm-2 control-label">所属项目：</label>-->
+        <!--<div class="col-sm-6">-->
+            <!--<select class="form-control" id="item" ng-model="record.item" ng-options="item.itemName as item.itemName for item in record.card.items">-->
+                <!--<option></option>-->
+            <!--</select>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div ng-switch on="show">-->
+        <!--<div class="form-group" ng-switch-default>-->
+            <!--<label for="item" class="col-sm-2 control-label">所属项目：</label>-->
+            <!--<div class="col-sm-6">-->
+                <!--<select class="form-control" id="item"  ng-options="item as item.itemName + ' &nbsp;&nbsp;(负责人：'+ item.itemOwner  + ' &nbsp;&nbsp;余额：'+ item.itemCount +  ')' for (itemIndex,item) in record.card.items" ng-model="record.itemIndex" required>-->
+                    <!--<option value="">请选择</option>-->
+                <!--</select>-->
+                <!--&lt;!&ndash;<select class="form-control" id="item" ng-model="k">&ndash;&gt;-->
+                <!--&lt;!&ndash;<option ng-repeat="(k,v) in record.card.items"> {{ k }}</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+            <!--</div>-->
+            <!---->
+        <!--</div>-->
+
+        <!--&lt;!&ndash;<div class="form-group" ng-switch-when="">&ndash;&gt;-->
+            <!--&lt;!&ndash;<label for="item2" class="col-sm-2 control-label">添加项目：</label>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-sm-6">&ndash;&gt;-->
+                <!--&lt;!&ndash;<input ng-model="record.item"  type="text" class="form-control" id="item2" placeholder="添加项目" required>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</div>-->
+
+    <div class="form-group">
+        <label for="itemName" class="col-sm-2 control-label">所属项目：</label>
+        <div class="col-sm-6">
+            <p ng-bind="record.card.items[record.itemIndex].itemName + '   （负责人：'+ record.card.items[record.itemIndex].itemOwner + '；余额：'+  record.card.items[record.itemIndex].itemCount+'）'"  type="text" class="form-control" id="itemName" placeholder="金额" required></p>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="executor" class="col-sm-2 control-label">办理人：</label>
+        <div class="col-sm-6">
+            <input ng-model="record.executor" type="text" class="form-control" id="executor" placeholder="办理人" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="reason" class="col-sm-2 control-label">原因：</label>
+        <div class="col-sm-6">
+            <input ng-model="record.reason" type="text" class="form-control" id="reason" placeholder="原因" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+            <button type="submit" class="btn btn-info" ng-disabled="recordForm.$invalid">确定</button>
+                <button ng-switch-default class="btn btn-default" ng-click="back()">取消</button>
+        </div>
+    </div>
+</form>

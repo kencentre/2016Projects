@@ -1,0 +1,39 @@
+body,p{
+    margin:0px;
+}
+a{
+    text-decoration: none !important;
+}
+a:visited{
+
+}
+ .navbar-fixed-top{
+    opacity:0.7;
+     padding-bottom: 4px;
+}
+
+ .main-navigation .menu li.nav-current {
+     border-bottom: 3px solid #ffffff;
+     margin-bottom: -5px;    /*在文字的下边 */
+ }
+ .navli :hover{
+     background-color: #83BCEC !important;
+     color: #fff;
+ }
+ .card{
+     text-decoration: none;
+     list-style: none;
+     padding: 5px;
+     border: solid 1px #428bca;
+     color:#fff;
+     margin: 5px;
+
+ }
+.card:hover{
+    background-color: #428bca !important;
+    color: #fff;
+}
+.card:hover a{
+    color: #fff;
+
+}

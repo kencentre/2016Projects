@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 引入外部的属性文件 -->
+    <context:property-placeholder location="classpath:/jdbc.properties"/>
+
+    <context:component-scan base-package="cn.edu.tju.scs.fm">
+        <!--<context:exclude-filter type="regex" expression="cn.edu.tju.scs.web.*"></context:exclude-filter>-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+    <!-- 配置 c3p0 连接池 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClass}"></property>
+        <property name="jdbcUrl" value="${jdbc.url}"></property>
+        <property name="user" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+
+    <!--&lt;!&ndash; 配置 服务层 Service &ndash;&gt;-->
+    <!--<bean id="accountService" class="cn.edu.tju.scs.fm.service.impl.AccountServiceImp">-->
+        <!--<property name="accountDao" ref="accountDao"></property>-->
+    <!--</bean>-->
+
+    <!--<bean id="userService" class="cn.edu.tju.scs.fm.service.impl.UserServiceImpl">-->
+        <!--<property name="userDao" ref="userDao"></property>-->
+    <!--</bean>-->
+
+    <!-- 配置 Dao 层 -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--<bean id="accountDao" class="cn.edu.tju.scs.fm.dao.impl.AccountDaoImp">-->
+        <!--<property name="dataSource" ref="dataSource"></property>-->
+    <!--</bean>-->
+    <!--<bean id="userDao" class="cn.edu.tju.scs.fm.dao.impl.UserDaoImpl">-->
+        <!--<property name="dataSource" ref="dataSource"></property>-->
+    <!--</bean>-->
+
+    <bean class="cn.edu.tju.scs.fm.Config" init-method="refreshConfig" destroy-method="destroy">
+        <property name="preLoginHandler">
+            <bean class="cn.edu.tju.scs.fm.service.captcha.CaptchaPreLoginHandler"></bean>
+        </property>
+    </bean>
+
+
+   <!--&lt;!&ndash; &lt;!&ndash;  配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!-- 配置一个事务的通知：（事务增强） -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--
+                 propagation:事务的传播行为
+                 isolation：事务的隔离级别
+                 read-only:只读
+                 rollback-for:发生哪些异常回滚
+                 no-rollback-for:发生哪些异常不会滚
+                 timeout:过期信息（-1）
+             -->
+            <tx:method name="transfer" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 配置切面 -->
+    <aop:config>
+        <!-- 配置切入点,   +号代表子类 -->
+        <aop:pointcut expression="execution(* cn.edu.tju.scs.fm.service.AccountService+ .*(..))" id="pointCut1"/>
+        <!-- 配置切面,advisor 一个切入点，一个通知;aspect 多个切入点，多个通知-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointCut1"/>
+    </aop:config>
+
+
+</beans>
