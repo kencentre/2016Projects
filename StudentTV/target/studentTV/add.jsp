@@ -62,12 +62,14 @@
 <div class="container kv-main" style="width: 800px ; height: 582px">
     <form enctype="multipart/form-data">
         <div class="form-group" style="height: 300px">
+            <%--<input id="file-5" name="file" class="file" type="file"  multiple data-preview-file-type="any" data-upload-url="http://121.42.217.4:8080/studentTV/video/upload">--%>
             <input id="file-5" name="file" class="file" type="file"  multiple data-preview-file-type="any" data-upload-url="http://localhost:8080/studentTV/video/upload">
         </div>
     </form>
 </div>
 </body>
 <script>
+    var rootUrl = "http://121.42.217.4:8080/";
     $('#file-fr').fileinput({
 //        language: 'zh',
 

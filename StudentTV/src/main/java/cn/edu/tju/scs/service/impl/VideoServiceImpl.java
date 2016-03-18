@@ -6,6 +6,7 @@ import cn.edu.tju.scs.domain.Video;
 import cn.edu.tju.scs.service.VideoService;
 import cn.edu.tju.scs.util.CreatePhotos;
 import cn.edu.tju.scs.util.FileUtil;
+import cn.edu.tju.scs.util.VideoTran;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -118,6 +119,13 @@ public class VideoServiceImpl implements VideoService{
             }
 
             /**
+             *  视频转换操作
+             */
+            String targetPath = targetFile.getAbsolutePath();
+            int targetIndex = targetPath.lastIndexOf(".");
+            VideoTran.convert(targetPath,targetPath.substring(0,targetIndex)+".mp4");
+
+            /**
              *  截取图片操作
              */
             String imagePath = null;
@@ -152,7 +160,7 @@ public class VideoServiceImpl implements VideoService{
 
 
             // filePath 此处是图片存储路径，+主机名+端口号+应用名，可以直接访问，浏览器可以直接访问的地址
-            String filePath =baseUrl + "/" + fileName;
+            String filePath =baseUrl + "/" + fileName.substring(0, fileName.lastIndexOf("."))+".mp4";
             return new String[] {filePath,imagePath,duration};
         }catch (IOException e){
             e.printStackTrace();

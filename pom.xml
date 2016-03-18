@@ -31,6 +31,7 @@
         <module>WeiXin</module>
         <module>FM</module>
         <module>Feeling</module>
+        <module>SoftwareTesting</module>
     </modules>
 
     <dependencyManagement>

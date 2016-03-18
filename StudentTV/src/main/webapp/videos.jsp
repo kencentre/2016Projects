@@ -87,6 +87,7 @@
 </div>
     <%@include file="footer.jsp" %>
     <script>
+//    var rootUrl = "http://121.42.217.4:8080/";
     var rootUrl = "http://localhost:8080/";
     $(document).ready(function() {
     loadTable();
